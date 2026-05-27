@@ -1,22 +1,22 @@
 1. In-band SQL
 
-- URL: `http://127.0.0.1/OhMyCrab/modules/sqli/inband.php`
+URL: `http://127.0.0.1/OhMyCrab/modules/sqli/inband.php`
 
-- Ứng dụng tồn tại lỗ hổng In-Band SQL Injection do dữ liệu đầu vào từ username và password được chèn trực tiếp vào câu truy vấn SQL mà không sử dụng prepared statement hoặc escaping phù hợp. Attacker có thể chèn payload SQL để bypass authentication hoặc trích xuất dữ liệu từ database.
+Ứng dụng tồn tại lỗ hổng In-Band SQL Injection do dữ liệu đầu vào từ username và password được chèn trực tiếp vào câu truy vấn SQL mà không sử dụng prepared statement hoặc escaping phù hợp. Attacker có thể chèn payload SQL để bypass authentication hoặc trích xuất dữ liệu từ database.
 
-- PoC
+PoC
 
-+ Intercept request `/OhMyCrab/modules/sqli/inband.php`.
+- Intercept request `/OhMyCrab/modules/sqli/inband.php`.
   
-+ Thay giá trị `username` bằng payload: `'OR 1=1 -- -`
+- Thay giá trị `username` bằng payload: `'OR 1=1 -- -`
   
-+ Forward request → Hiển thị "Đăng nhập thành công"
+- Forward request → Hiển thị "Đăng nhập thành công"
 
-+ Kết quả PoC cho lỗ hổng In-band SQL:
+- Kết quả PoC cho lỗ hổng In-band SQL:
 
 <img width="890" height="444" alt="image" src="https://github.com/user-attachments/assets/6bd469f6-8e87-4bc6-b67b-6284389f612a" />
 
-- Phân tích source code
+Phân tích source code
 
 ```
     $message = "";
@@ -34,9 +34,9 @@
     }
 ```
 
-Đoạn code trên lỗi do biến $username và $password nhận trực tiếp dữ liệu rồi nối thẳng vào câu truy vấn SQL mà không qua bất kỳ cơ chế lọc hay kiểm tra dữ liệu nào.
+- Đoạn code trên lỗi do biến $username và $password nhận trực tiếp dữ liệu rồi nối thẳng vào câu truy vấn SQL mà không qua bất kỳ cơ chế lọc hay kiểm tra dữ liệu nào.
 
-- Cách khắc phục
+Cách khắc phục
 
 ```
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -55,9 +55,9 @@
     }
 ```
 
-Sử dụng Prepared Statements: hàm `mysqli_prepare` và `mysqli_stmt_bind_param`. `?` thay thế input trực tiếp. `bind_param()` đảm bảo input là data, không phải SQL code.
+- Sử dụng Prepared Statements: hàm `mysqli_prepare` và `mysqli_stmt_bind_param`. `?` thay thế input trực tiếp. `bind_param()` đảm bảo input là data, không phải SQL code.
 
-- Script khai thác
+Script khai thác
 
 ```
 import requests
@@ -79,27 +79,27 @@ else:
 
 2. Blind SQL
 
-- URL: `http://127.0.0.1/OhMyCrab/modules/sqli/blind.php`
+URL: `http://127.0.0.1/OhMyCrab/modules/sqli/blind.php`
 
-- Ứng dụng tồn tại lỗ hổng Blind SQL Injection do tham số id được chèn trực tiếp vào câu truy vấn SQL mà không sử dụng prepared statement. Phản hồi không trả dữ liệu trực tiếp mà chỉ trả về thông báo logic (“Người dùng tồn tại” / “Người dùng không tồn tại”), cho phép attacker suy luận dữ liệu thông qua phản hồi đúng/sai.
+Ứng dụng tồn tại lỗ hổng Blind SQL Injection do tham số id được chèn trực tiếp vào câu truy vấn SQL mà không sử dụng prepared statement. Phản hồi không trả dữ liệu trực tiếp mà chỉ trả về thông báo logic (“Người dùng tồn tại” / “Người dùng không tồn tại”), cho phép attacker suy luận dữ liệu thông qua phản hồi đúng/sai.
 
-- PoC:
+PoC:
 
-+ Send to repeater request: `http://127.0.0.1/OhMyCrab/modules/sqli/blind.php?id=1`
+- Send to repeater request: `http://127.0.0.1/OhMyCrab/modules/sqli/blind.php?id=1`
 
-+ Test payload:
+- Test payload:
 
-`'AND 1=1-- -`
+- `'AND 1=1-- -`
 
 <img width="904" height="485" alt="image" src="https://github.com/user-attachments/assets/2714afba-e4be-4cfd-981a-80bde9cbd132" />
 
-`'AND 1=2-- -`
+- `'AND 1=2-- -`
 
 <img width="856" height="440" alt="image" src="https://github.com/user-attachments/assets/7bf7012e-24c1-4baa-b106-d99ac77b57b0" />
 
-Attacker có thể: brute force từng ký tự của database, dump username/password
+- Attacker có thể: brute force từng ký tự của database, dump username/password
 
-- Phân tích source code
+Phân tích source code
 
 ```
     if (isset($_GET['id'])) {
@@ -118,9 +118,9 @@ Attacker có thể: brute force từng ký tự của database, dump username/pa
     }
 ```
 
-Nhận dữ liệu đầu vào qua phương thức `GET['id']`, thực hiện nối chuỗi trực tiếp vào truy vấn SQL. Kẻ tấn công có thể chèn các mệnh đề logic kèm các hàm cắt chuỗi để ép database xử lý. Do cơ chế kiểm tra kết quả dựa hoàn toàn vào hàm mysqli_num_rows($result) > 0, ứng dụng vô tình tiết lộ dữ liệu.
+- Nhận dữ liệu đầu vào qua phương thức `GET['id']`, thực hiện nối chuỗi trực tiếp vào truy vấn SQL. Kẻ tấn công có thể chèn các mệnh đề logic kèm các hàm cắt chuỗi để ép database xử lý. Do cơ chế kiểm tra kết quả dựa hoàn toàn vào hàm mysqli_num_rows($result) > 0, ứng dụng vô tình tiết lộ dữ liệu.
 
-- Cách khắc phục
+Cách khắc phục
 
 ```
     if (isset($_GET['id'])) {
@@ -139,9 +139,9 @@ Nhận dữ liệu đầu vào qua phương thức `GET['id']`, thực hiện n�
     }
 ```
 
-Thay thế việc nối chuỗi bằng cơ chế Prepared Statement. Chỉ định rõ tham số truyền vào là dạng số nguyên "i" thông qua hàm mysqli_stmt_bind_param giúp chặn việc chèn ký tự. Mọi payload SQL injection truyền vào lúc này chỉ được coi là giá trị ID bình thường.
+- Thay thế việc nối chuỗi bằng cơ chế Prepared Statement. Chỉ định rõ tham số truyền vào là dạng số nguyên "i" thông qua hàm mysqli_stmt_bind_param giúp chặn việc chèn ký tự. Mọi payload SQL injection truyền vào lúc này chỉ được coi là giá trị ID bình thường.
 
-- Script khai thác
+Script khai thác
 
 ```
 import requests
@@ -181,4 +181,4 @@ else:
     print("Không khai thác được. Vui lòng kiểm tra lại URL hoặc Payload.")
 ```
 
-Sử dụng hàm ASCII() để chuyển đổi ký tự trả về từ SUBSTRING() thành số để tránh lỗi so sánh chuỗi. Khi tìm được số chính xác khiến trang web trả về "Người dùng tồn tại", script dùng hàm chr() trong Python để dịch ngược số đó thành chữ và cộng dồn vào chuỗi kết quả. Khi dịch sang vị trí tiếp theo mà không có mã ASCII nào khớp, câu lệnh SUBSTRING đã chạm tới cuối chuỗi (chuỗi rỗng), script sẽ tự động dừng lại và in ra kết quả cuối cùng.
+- Sử dụng hàm ASCII() để chuyển đổi ký tự trả về từ SUBSTRING() thành số để tránh lỗi so sánh chuỗi. Khi tìm được số chính xác khiến trang web trả về "Người dùng tồn tại", script dùng hàm chr() trong Python để dịch ngược số đó thành chữ và cộng dồn vào chuỗi kết quả. Khi dịch sang vị trí tiếp theo mà không có mã ASCII nào khớp, câu lệnh SUBSTRING đã chạm tới cuối chuỗi (chuỗi rỗng), script sẽ tự động dừng lại và in ra kết quả cuối cùng.
