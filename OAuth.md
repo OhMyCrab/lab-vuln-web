@@ -18,9 +18,9 @@ PoC
 
 <img width="894" height="396" alt="image" src="https://github.com/user-attachments/assets/657ab55e-4fac-488f-b310-904b9aac42f2" />
 
-Ứng dụng redirect đến: `http://127.0.0.1/OhMyCrab/modules/oauth/callback.php.attacker.com?code=b8cee6a70005dc3dd191e60b108b27b5`
+- Ứng dụng redirect đến: `http://127.0.0.1/OhMyCrab/modules/oauth/callback.php.attacker.com?code=b8cee6a70005dc3dd191e60b108b27b5`
 
-Authorization code bị leaked tới một endpoint do attacker kiểm soát thông qua việc thao túng tham số `redirect_uri`, cho phép exfiltration mã authorization code của OAuth.
+- Authorization code bị leaked tới một endpoint do attacker kiểm soát thông qua việc thao túng tham số `redirect_uri`, cho phép exfiltration mã authorization code của OAuth.
 
 Phân tích Source Code
 
