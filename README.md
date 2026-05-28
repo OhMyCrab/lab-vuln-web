@@ -1,8 +1,16 @@
-# Vulnerable Web Application Lab
+# OhMyCrab 
 
-This project is a deliberately vulnerable web application created for
-security research and vulnerability analysis.
+Dự án này là một ứng dụng web được thiết kế có tính dễ bị tổn thương một cách cố ý nhằm mục đích
+nghiên cứu bảo mật và phân tích lỗ hổng.
 
-The goal of this lab is to demonstrate common web vulnerabilities,
-analyze their root causes in source code, develop exploit scripts,
-and provide secure patches.
+Mục tiêu của dự án này là để dựng lại các lỗ hổng web phổ biến, phân tích nguyên nhân lỗi và cung cấp các cách khắc phục.
+
+Các tài khoản đăng nhập:
+
+- admin/admin123
+
+- guest/guest
+
+- caymai/caymai123
+
+- kr4v7/crabmeifucan
