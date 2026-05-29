@@ -1,0 +1,362 @@
+/* ==========================================================================
+   CORE PLATFORM GLOBAL STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #121212;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ==========================================================================
+   SIDEBAR COMPONENT (TERMINAL DARK TONE)
+   ========================================================================== */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #0c0c0c;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    border-right: 2px solid #ff6600;
+    font-family: 'Courier New', Courier, monospace;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 5px 0 15px rgba(255, 102, 0, 0.05);
+}
+
+.sidebar h2 {
+    color: #ff6600;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed #ff6600;
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li b {
+    display: block;
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    padding-left: 5px;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: #b0b0b0;
+    text-decoration: none;
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 3px;
+    border-left: 3px solid transparent;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(255, 102, 0, 0.08);
+    color: #ff6600;
+    padding-left: 16px;
+    border-left: 3px solid #ff6600;
+    text-shadow: 0 0 5px rgba(255, 102, 0, 0.3);
+}
+
+.sidebar hr {
+    border: none !important;
+    height: 1px;
+    background: linear-gradient(90deg, #2a2a2a, transparent) !important;
+    margin: 15px 0 !important;
+}
+
+.sidebar ul li a[href*="logout.php"] {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.sidebar ul li a[href*="logout.php"]:hover {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+    border-left-color: #ff4d4d;
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.4);
+}
+
+/* Custom Scrollbar cho Sidebar */
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: #222; }
+.sidebar::-webkit-scrollbar-thumb:hover { background: #ff6600; }
+
+
+/* ==========================================================================
+   MAIN CONTENT & LAB WORKSPACE
+   ========================================================================== */
+.content {
+    margin-left: 270px;
+    padding: 40px 30px;
+    width: calc(100% - 250px);
+}
+
+.content h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.content h2 {
+    font-size: 24px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #ff6600;
+}
+
+.content p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #94a3b8;
+}
+
+/* Khung cấu trúc dữ liệu / Textarea */
+.content textarea {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 12px;
+    outline: none;
+    width: 100%;
+}
+.content textarea:focus {
+    border-color: #ff6600;
+}
+
+/* Inputs & Buttons trong bài Lab */
+.content input[type="text"],
+.content input[type="password"] {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 14px;
+    font-size: 15px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.content input[type="text"]:focus,
+.content input[type="password"]:focus {
+    border-color: #ff6600;
+}
+
+.content button[type="submit"],
+.content input[type="submit"] {
+    display: inline-block;
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    padding: 11px 24px;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+}
+
+.content button[type="submit"]:hover,
+.content input[type="submit"]:hover {
+    background: #e65c00;
+}
+
+.content a {
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+.content a:hover {
+    text-decoration: underline;
+    color: #ff8533;
+}
+
+.content hr {
+    border: 0;
+    height: 1px;
+    background: #2a2a2a;
+    margin: 25px 0;
+}
+
+
+/* ==========================================================================
+   ADMIN PANEL DASHBOARD & COMPONENTS
+   ========================================================================== */
+.admin-content {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.admin-content h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.admin-content p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #94a3b8;
+    text-align: center;
+}
+
+/* Topbar Sticky của Admin */
+.admin-sticky-header {
+    position: sticky;
+    top: 0;
+    background: #121212;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid #2a2a2a;
+    margin-bottom: 20px;
+}
+
+.admin-sticky-header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #fff;
+}
+
+.admin-sticky-header .btn-back {
+    background: #ff6600;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.admin-sticky-header .btn-back:hover {
+    background: #e65c00;
+}
+
+/* Grid Menu chứa các ô Cards */
+.admin-grid-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: 30px auto;
+    width: 100%;
+}
+
+.admin-grid-menu .menu-card {
+    background: #141414;
+    border: 2px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 25px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s ease;
+}
+
+.admin-grid-menu .menu-card h3 {
+    color: #ff6600;
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.admin-grid-menu .menu-card span {
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.admin-grid-menu .menu-card:hover {
+    border-color: #ff6600;
+    background: rgba(255, 102, 0, 0.02);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 102, 0, 0.15);
+}
+
+/* Bảng hiển thị dữ liệu Admin (Users, Logs) */
+.admin-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+}
+
+.admin-content th {
+    background-color: #ff6600;
+    color: #ffffff;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #cc5200;
+    text-align: center;
+}
+
+.admin-content td {
+    padding: 14px 18px;
+    color: #e2e8f0;
+    font-size: 14px;
+    border: 1px solid #2a2a2a;
+}
+
+.admin-content td:last-child, 
+.admin-content th:last-child {
+    padding-left: 25px;
+    padding-right: 25px;
+    white-space: nowrap;
+}
+
+.admin-content tr:hover {
+    background-color: rgba(255, 102, 0, 0.02);
+}
+
+/* Bootstrap / Thao tác phụ cũ */
+.navbar {
+    height: 50px;
+    background: #141414;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-left: 250px;
+    border-bottom: 1px solid #2a2a2a;
+}

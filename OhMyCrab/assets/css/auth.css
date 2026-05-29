@@ -1,0 +1,134 @@
+/* ==========================================================================
+   AUTH CYBERPUNK TERMINAL - STYLE FILE
+   ========================================================================== */
+body {
+    background-color: #0d0d0d;
+    font-family: 'Courier New', Courier, monospace;
+    color: #ff9f43;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-image: 
+        radial-gradient(rgba(255, 159, 67, 0.1), #000 80%),
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 100%, 100% 4px, 6px 100%;
+}
+
+.auth-container {
+    width: 450px;
+    background: #141414;
+    border: 2px solid #ff9f43;
+    box-shadow: 0 0 20px rgba(255, 159, 67, 0.2);
+    padding: 25px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Hiệu ứng góc dạng thẻ định danh hệ thống */
+.auth-container::before {
+    content: "SYSTEM_AUTH_v2.6";
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #0d0d0d;
+    padding: 0 10px;
+    font-size: 11px;
+    color: #ff9f43;
+    letter-spacing: 2px;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    font-size: 22px;
+    letter-spacing: 3px;
+    text-align: center;
+    color: #ff9f43;
+    text-shadow: 0 0 8px rgba(255, 159, 67, 0.6);
+}
+
+.terminal-meta {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #333;
+    padding-bottom: 10px;
+    line-height: 1.5;
+}
+
+.input-group {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: #ff9f43;
+    letter-spacing: 1px;
+}
+
+.input-group input {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    padding: 12px 10px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #ff9f43;
+    background: #222;
+    box-shadow: 0 0 10px rgba(255, 159, 67, 0.3);
+}
+
+button {
+    width: 100%;
+    background: #ff9f43;
+    color: #000;
+    border: none;
+    padding: 14px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid #ff4d4d;
+    padding: 8px;
+    background: rgba(255, 77, 77, 0.1);
+}
+
+.terminal-footer {
+    margin-top: 25px;
+    font-size: 10px;
+    color: #555;
+    text-align: center;
+    border-top: 1px dashed #333;
+    padding-top: 12px;
+}
