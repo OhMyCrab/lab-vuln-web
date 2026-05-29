@@ -26,6 +26,7 @@
 <head>
     <meta charset="UTF-8">
     <title>OhMyCrab - Terminal Login</title>
+    <link rel="stylesheet" href="/OhMyCrab/assets/css/auth.css">
 </head>
 <body>
 
