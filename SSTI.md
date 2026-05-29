@@ -64,7 +64,7 @@ if match:
     print(f"PHP Version: {php_version}")
 
 else:
-    print("[-] Khai thác thất bại")
+    print("Khai thác thất bại")
 ```
 
 Script gửi payload SSTI tới ứng dụng để thực thi hàm phpversion() trên server và trích xuất trực tiếp phiên bản PHP từ response trả về.
