@@ -1,4 +1,4 @@
-# OhMyCrab 
+# OhMyCrab 🦀
 
 Dự án này là một ứng dụng web được thiết kế có tính dễ bị tổn thương một cách cố ý nhằm mục đích nghiên cứu bảo mật và phân tích lỗ hổng.
 
